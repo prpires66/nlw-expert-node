@@ -7,11 +7,12 @@ export async function getPoll(app: FastifyInstance) {
     const getPollParams = z.object({
       pollId: z.string().uuid(),
     })
+
     const { pollId } = getPollParams.parse(request.params)
 
     const poll = await prisma.poll.findUnique({
-      where: { 
-        id: pollId,
+      where: {
+        id: pollId
       },
       include: {
         options: {
@@ -23,6 +24,7 @@ export async function getPoll(app: FastifyInstance) {
       }
     })
 
-    return reply.status(200).send({ poll })
+    return reply.send({ poll })
   })
+
 }

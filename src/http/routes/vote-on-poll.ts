@@ -35,7 +35,7 @@ export async function voteOnPoll(app: FastifyInstance) {
           }
         })
       } else if (userPreviousVoteOnPoll) {
-        return reply.status(400).send({ message: 'You have already voted on this poll' })
+        return reply.status(400).send({ message: 'You already voted on this poll' })
       }
     }
 
@@ -44,7 +44,7 @@ export async function voteOnPoll(app: FastifyInstance) {
 
       reply.setCookie('sessionId', sessionId, {
         path: '/',
-        maxAge: 60 * 60 * 24 * 30, // 30 days
+        maxAge: 300,
         signed: true,
         httpOnly: true,
       });
